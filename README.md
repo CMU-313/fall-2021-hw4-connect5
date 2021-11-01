@@ -37,5 +37,15 @@ $ curl \
     http://localhost:5000/predictjson
 ```
 
+## Model Description
+
+### Input Features
+The features we used in training our model are: health, absences, age, G2, G3
+
+### Improvement from the Baseline Model
+By taking in G2 as an additional feature, our retrained model achieves an f1 score of 0.9861111111111112 on the test set. In comparison, the f1 score of the baseline model on the test set is 0.5185185185185185.
+
+Thus, our retrained model has a significantly better out-of-sample accuracy than the baseline model, which indicates a better model quality.
+
 ## Testing
 **(what testing have we done? How do we run tests?)**
