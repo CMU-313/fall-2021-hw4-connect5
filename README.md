@@ -74,11 +74,15 @@ In comparison, the baseline model only has
 Thus, our retrained model has a significantly better out-of-sample performance than the baseline model, which indicates better model quality.
 
 ## Testing
-We had two categories of tests: unit tests on the model and integration tests for the microservice. The model unit tests take the model
+We had two categories of tests: unit tests on the model and integration tests for the microservice. 
+
+The model unit tests take the model
 and run predictions on the test data. It ensures that the model reaches desired thresholds on a number of metrics. We set the thresholds
 based on what we believed to be a good accuracy goal.
 
-The integration tests on the microservice essentially make sure that it works. It does this by sending both get and post requests to
+The integration tests on the microservice ensure that the API works as expected. It does this by sending both `GET` and `POST` requests to
 the service and ensures they get appropriate responses. These tests require that the microservice be running already.
 
-To run the test suite, first deploy the microservice on port 5000. Then run pytest in the parent directory.
+To run the test suite, first deploy the microservice on port `5000`. Then run `pytest` in the parent directory.
+
+These tests are automatically run on GitHub Actions for every commit and pull request to the master branch.
