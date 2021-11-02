@@ -1,5 +1,5 @@
 # Software Engineering for Machine Learning Assignment (Machine Learning Microservice)
-This microservice uses a machine learning model to predict a student's likelihood of success based on age, absences, health, and their second period grades. The machine learning model is based on a **random forest classifier** and the microservice is available via **HTTP request** to the endpoint `/predict`, which can be called while the microservice is **deployed** as discussed in [API Documentation](https://github.com/CMU-313/fall-2021-hw4-connect5#api-documentation) below.
+This microservice uses a machine learning model to predict a student's likelihood of success based on age, absences, health, and their second period grades. The machine learning model is based on a **random forest classifier** and the microservice is available via **HTTP request** through the `/predict` and `/predictjson` endpoints, which can be called while the microservice is **deployed** as discussed in [API Documentation](https://github.com/CMU-313/fall-2021-hw4-connect5#api-documentation) below.
 
 ## Deploying the Microservice
 The microservice is built in Python using Flask for the API and can be deployed in a **Docker** container.
