@@ -21,14 +21,14 @@ def test_empty_request(http):
     assert response.status_code == 500
 
 def test_url_request(http):
-    params = {'age' : 10, 'absences' : 5, 'health' : 1}
+    params =  {'age': 10, 'absences': 5, 'health': 1, 'G2': 15}
     response = http.get(URL, params=params)
     assert response.status_code == 200
     text = response.text.strip()
     assert text == '0' or text == '1'
 
 def test_api_request(http):
-    data = {'age' : 10, 'absences' : 5, 'health' : 1}
+    data =  {'age': 10, 'absences': 5, 'health': 1, 'G2': 15}
     headers = {'Content-Type': 'application/json'}
     response = http.post(URL_JSON, data=json.dumps(data), headers=headers)
     assert response.status_code == 200
