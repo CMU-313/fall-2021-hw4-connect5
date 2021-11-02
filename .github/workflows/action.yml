@@ -12,9 +12,6 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Create model
-      run: jupyter nbconvert --execute <notebook>
-
     - name: Build docker image
       run: |
         cd dockerfile
