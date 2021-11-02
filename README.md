@@ -42,10 +42,22 @@ $ curl \
 ### Input Features
 The features we used in training our model are `health`, `absences`, `age`, and `G2`.
 
-### Improvement from the Baseline Model
-By taking in G2 as an additional feature, our retrained model achieves an f1 score of 0.9861111111111112 on the test set. In comparison, the f1 score of the baseline model on the test set is 0.5185185185185185.
+We decided to based our model on these 4 features because through our experimentations, we found that `health`, `absences`, `age`, and `G2` are the top 4 most influential features for predicting `G3`.
 
-Thus, our retrained model has a significantly better out-of-sample accuracy than the baseline model, which indicates better model quality.
+### Improvement from the Baseline Model
+By taking in `G2` as an additional feature, our retrained model achieves 
+
+1. 0.9285714285714286 f1 score on the test set.
+2. 0.9746835443037974 accuracy on the test set.
+3. 0.874409523889261 log loss on the test set.
+
+In comparison, the baseline model only has
+
+1. 0.17391304347826086 f1 score on the test set.
+2. 0.759493670886076 accuracy on the test set.
+3. 8.306865173231825 log loss on the test set.
+
+Thus, our retrained model has a significantly better out-of-sample performance than the baseline model, which indicates better model quality.
 
 ## Testing
 **(what testing have we done? How do we run tests?)**
