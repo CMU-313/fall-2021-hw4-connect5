@@ -1,0 +1,21 @@
+name: Test
+on:
+  pull_request:
+  push: { branches: master,  add-github-action}
+
+jobs:
+  test:
+    name: Run test suite
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Create model
+      run: jupyter nbconvert --execute <notebook>
+
+    - name: Build docker image
+      run: |
+        cd dockerfile
+        docker build -t ml:latest .
