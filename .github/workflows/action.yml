@@ -15,7 +15,7 @@ jobs:
     - name: Build docker image
       run: |
         cd dockerfile
-        docker build -t ml:latest --target test .
+        docker build -t ml:latest .
 
     - name: Run docker container
       run: docker run -d -p 5000:5000 ml
