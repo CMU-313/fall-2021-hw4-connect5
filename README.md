@@ -25,7 +25,7 @@ The **predict** endpoint, which returns a prediction of a student's success base
 A single value is returned from the model. **(what is that value? how do we interpret the model's output?)**
 
 ### Query Parameters in URL
-Query parameters can be appended to the URL as shown in the following example: [http://localhost:5000/predict?age=10&absences=5&health=1](http://localhost:5000/predict?age=10&absences=5&health=1) **(replace with whatever is actually decided on)**). Make sure to include all of the arguments.
+Query parameters can be appended to the URL as shown in the following example: [http://localhost:5000/predict?age=1&absences=2&health=3&G2=4](http://localhost:5000/predict?age=1&absences=2&health=3&G2=4). Make sure to include all of the arguments.
 
 ### Query with JSON
 An HTTP request containing JSON can also be used to query the API. An example `curl` query follows:
@@ -33,19 +33,19 @@ An HTTP request containing JSON can also be used to query the API. An example `c
 $ curl \
     --request POST \
     --header "Content-Type: application/json" \
-    --data '{"age":"10","absences":"5","health":"1"}' \
+    --data '{"age":"1","absences":"2","health":"3","G2":"4"}' \
     http://localhost:5000/predictjson
 ```
 
 ## Model Description
 
 ### Input Features
-The features we used in training our model are: health, absences, age, G2, G3
+The features we used in training our model are `health`, `absences`, `age`, and `G2`.
 
 ### Improvement from the Baseline Model
 By taking in G2 as an additional feature, our retrained model achieves an f1 score of 0.9861111111111112 on the test set. In comparison, the f1 score of the baseline model on the test set is 0.5185185185185185.
 
-Thus, our retrained model has a significantly better out-of-sample accuracy than the baseline model, which indicates a better model quality.
+Thus, our retrained model has a significantly better out-of-sample accuracy than the baseline model, which indicates better model quality.
 
 ## Testing
 **(what testing have we done? How do we run tests?)**
