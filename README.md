@@ -29,13 +29,13 @@ The `/predict` endpoint accepts a `GET` request with the following required quer
 An example request is [http://localhost:5000/predict?age=1&absences=2&health=3&G2=4](http://localhost:5000/predict?age=1&absences=2&health=3&G2=4)
 
 ### `/predictjson`
-The `/predictjson` endpoint accepts a `POST` request with the same required arguments as `/predict` but specified as JSON in the *body* of the request (`#` as placeholder for number):
+The `/predictjson` endpoint accepts a `POST` request with the same required arguments as `/predict` but specified as JSON in the *body* of the request as seen in the example below (all numeric values as placeholders):
 ```json
 {
-    "age": #,
-    "absences": #,
-    "health": #,
-    "G2": #
+    "age": 1,
+    "absences": 2,
+    "health": 3,
+    "G2": 4
 }
 ```
 
