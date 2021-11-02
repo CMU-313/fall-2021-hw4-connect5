@@ -25,21 +25,45 @@ def hello():
 
 @app.route('/predict')
 def predict():
-    # use entries from the query string here but could also use json
-    age = request.args.get('age')
-    absences = request.args.get('absences')
-    health = request.args.get('health')
-    g2 = request.args.get('G2')
+    required_params = ['age', 'absences', 'health', 'G2']
+    # Check that all required parameters are present and of the correct type
+    for param in required_params:
+        if not param in request.args:
+            # Return HTTP 400 error if missing parameter
+            return "Missing parameter: " + param, 400
+
+        if request.args.get(param, type=float) is None:
+            # Return HTTP 400 error if parameter is of the wrong type
+            return f"Invalid type for {param}. Expected int/float.", 400
+
+    age = request.args.get('age', type=float)
+    absences = request.args.get('absences', type=float)
+    health = request.args.get('health', type=float)
+    g2 = request.args.get('G2', type=float)
+
     data = [[g2], [absences], [age], [health]]
     return query_model(data)
 
 
 @app.route('/predictjson', methods=['POST'])
 def predictjson():
+    required_params = ['age', 'absences', 'health', 'G2']
+    # Check that all required parameters are present and of the correct type
+    for param in required_params:
+        if not param in request.json:
+            # Return HTTP 400 error if missing parameter
+            return "Missing parameter: " + param, 400
+
+        if (not isinstance(request.json[param], float) and
+                not isinstance(request.json[param], int)):
+            # Return HTTP 400 error if parameter is of the wrong type
+            return f"Invalid type for {param}. Expected int/float.", 400
+
     age = request.json['age']
     absences = request.json['absences']
     health = request.json['health']
     g2 = request.json['G2']
+
     data = [[g2], [absences], [age], [health]]
     return query_model(data)
 
