@@ -76,9 +76,12 @@ Thus, our retrained model has a significantly better out-of-sample performance t
 ## Testing
 We had two categories of tests: unit tests on the model and integration tests for the microservice. The model unit tests take the model
 and run predictions on the test data. It ensures that the model reaches desired thresholds on a number of metrics. We set the thresholds
-based on what we believed to be a good accuracy goal.
+based on what we believed to be a good accuracy goal. We chose these unit tests to establish an idea of when our model would be "good enough".
 
 The integration tests on the microservice essentially make sure that it works. It does this by sending both get and post requests to
-the service and ensures they get appropriate responses. These tests require that the microservice be running already.
+the service and ensures they get appropriate responses. These tests require that the microservice be running already. We chose these
+tests to ensure that the api works and provides desired results.
+
+We made these tests automated in this way so that we could run them through github actions ci.
 
 To run the test suite, first deploy the microservice on port 5000. Then run pytest in the parent directory.
