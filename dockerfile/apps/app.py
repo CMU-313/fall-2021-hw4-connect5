@@ -7,11 +7,12 @@ app = Flask(__name__)
 
 
 def query_model(data):
+    # Note: param order matters, need to match order when calling `clf.fit()`
     query_df = pd.DataFrame({
-        'age': pd.Series(data[0][0]),
-        'health': pd.Series(data[1][0]),
-        'absences': pd.Series(data[2][0]),
-        'G2': pd.Series(data[3][0])
+        'G2': pd.Series(data[0][0]),
+        'absences': pd.Series(data[1][0]),
+        'age': pd.Series(data[2][0]),
+        'health': pd.Series(data[3][0])
     })
     prediction = clf.predict(query_df)
     return jsonify(np.asscalar(prediction))
@@ -29,7 +30,7 @@ def predict():
     absences = request.args.get('absences')
     health = request.args.get('health')
     g2 = request.args.get('G2')
-    data = [[age], [health], [absences], [g2]]
+    data = [[g2], [absences], [age], [health]]
     return query_model(data)
 
 
@@ -39,7 +40,7 @@ def predictjson():
     absences = request.json['absences']
     health = request.json['health']
     g2 = request.json['G2']
-    data = [[age], [health], [absences], [g2]]
+    data = [[g2], [absences], [age], [health]]
     return query_model(data)
 
 
