@@ -1,0 +1,27 @@
+name: Test
+on:
+  pull_request:
+  push: { branches: master }
+
+jobs:
+  test:
+    name: Run test suite
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Intall pip requirements
+      run: pip install -r requirements.txt
+
+    - name: Build docker image
+      run: |
+        cd dockerfile
+        docker build -t ml:latest .
+
+    - name: Run docker container
+      run: docker run -d -p 5000:5000 ml
+
+    - name: Run tests
+      run: pytest
