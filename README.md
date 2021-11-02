@@ -1,5 +1,5 @@
 # Software Engineering for Machine Learning Assignment (Machine Learning Microservice)
-This microservice uses a machine learning model to predict a student's likelihood of success based on **fill**, **this**, and **in**. The machine learning model is based on a **random forest (confirm?)** and the microservice is available via **HTTP request** to the endpoint **predict**, which can be called while the microservice is **deployed** as discussed in [API Documentation](https://github.com/CMU-313/fall-2021-hw4-connect5#api-documentation) below.
+This microservice uses a machine learning model to predict a student's likelihood of success based on age, absences, health, and their second period grades. The machine learning model is based on a **random forest classifier** and the microservice is available via **HTTP request** through the `/predict` and `/predictjson` endpoints, which can be called while the microservice is **deployed** as discussed in [API Documentation](https://github.com/CMU-313/fall-2021-hw4-connect5#api-documentation) below.
 
 ## Deploying the Microservice
 The microservice is built in Python using Flask for the API and can be deployed in a **Docker** container.
@@ -12,30 +12,44 @@ $ docker build -t ml:latest .
 containerIDstring
 ```
 
-To **run** the container (on port 5000), use `docker run -d -p 5000:5000 ml`
+To **run** the container (on port `5000`), use `docker run -d -p 5000:5000 ml`
 
 ## API Documentation
-The **predict** endpoint, which returns a prediction of a student's success based on relevant features, can be accessed by either adding query parameters to the URL or sending an HTTP request with JSON containing the arguments.
+There are two available API endpoints for accessing the model: `/predict` and `/predictjson`.
 
-### Parameters
-**(what are the parameters, what do they mean, and why were they selected for the model?)**
-**(why is this better than the baseline?)**
+### `/predict`
+The `/predict` endpoint accepts a `GET` request with the following required query arguments:
+|Parameter|Description|
+|---|---|
+|`age`|Student's age (numeric: 15 to 22)|
+|`absences`|Number of school absences (numeric: 0 to 93)|
+|`health`|Current health status (numeric: 1 (very bad) to 5 (very good))|
+|`G2`|Second period grade (numeric: 0 to 20)|
 
-### Output
-A single value is returned from the model. **(what is that value? how do we interpret the model's output?)**
+An example request is [http://localhost:5000/predict?age=1&absences=2&health=3&G2=4](http://localhost:5000/predict?age=1&absences=2&health=3&G2=4)
 
-### Query Parameters in URL
-Query parameters can be appended to the URL as shown in the following example: [http://localhost:5000/predict?age=1&absences=2&health=3&G2=4](http://localhost:5000/predict?age=1&absences=2&health=3&G2=4). Make sure to include all of the arguments.
+### `/predictjson`
+The `/predictjson` endpoint accepts a `POST` request with the same required arguments as `/predict` but specified as JSON in the *body* of the request as seen in the example below (all numeric values as placeholders):
+```json
+{
+    "age": 1,
+    "absences": 2,
+    "health": 3,
+    "G2": 4
+}
+```
 
-### Query with JSON
-An HTTP request containing JSON can also be used to query the API. An example `curl` query follows:
+An example `curl` query follows:
 ```sh
 $ curl \
     --request POST \
     --header "Content-Type: application/json" \
-    --data '{"age":"1","absences":"2","health":"3","G2":"4"}' \
+    --data '{"age":1,"absences":2,"health":3,"G2":4}' \
     http://localhost:5000/predictjson
 ```
+
+### Output
+The output is a scalar value: `0` or `1`, which corresponds to whether or not a student is predicted to be successful by the end of the year, as measured by their final grade. A value of `1` means that a student is predicted to be successful whereas `0` means otherwise.
 
 ## Model Description
 
